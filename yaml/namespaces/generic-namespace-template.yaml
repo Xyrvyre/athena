@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: <insert-namespace-name-here>
+  labels:
+    name: <insert-namespace-name-here>
