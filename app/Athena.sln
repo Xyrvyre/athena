@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athena", "Athena\Athena.csproj", "{501BA8A2-DEE9-4D09-8245-98D2C4F712B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{501BA8A2-DEE9-4D09-8245-98D2C4F712B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{501BA8A2-DEE9-4D09-8245-98D2C4F712B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{501BA8A2-DEE9-4D09-8245-98D2C4F712B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{501BA8A2-DEE9-4D09-8245-98D2C4F712B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0A0E1CA-259B-4877-B7EA-6FC473036D20}
+	EndGlobalSection
+EndGlobal
