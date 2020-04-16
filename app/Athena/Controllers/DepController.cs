@@ -14,11 +14,12 @@ namespace Athena.Controllers
         public IActionResult Index()
         {
 
-            string pathSource = @"C:\Users\s\source\repos\a2.yaml";            
+            string pathSource = @"C:\Users\s\source\repos\Dep_Kub\a2.yaml";            
             System.IO.TextReader readFile = new StreamReader(pathSource);
             string line = null;
             line = readFile.ReadToEnd();
             string[] words = line.Split(new Char[] { ' ', '\n', '\r' });
+            //string a = "apps/v1";
             string a = words[1];
             /*
             V1Deployment deployment = new V1Deployment()
@@ -82,7 +83,7 @@ namespace Athena.Controllers
                 Kind = "Deployment",
                 Metadata = new V1ObjectMeta()
                 {
-                    Name = "nginx-deployment6",
+                    Name = "nginx-deployment11",
                     Labels = new Dictionary<string, string>()
                              {
                                  { "app", "nginx" }
