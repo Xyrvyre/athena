@@ -1,7 +1,7 @@
 # Kali Client Dockerfile
 
 
-FROM kalilinux/kali-rolling 
+FROM kali-ssh-server
 
 # Install core apps
 
@@ -9,8 +9,8 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-client
 
 # Install SSH private key
 
-RUN mkdir /root/.ssh
 COPY id_rsa /root/.ssh/
 RUN chmod 600 /root/.ssh/id_rsa
 
-CMD ["bash"]
+ENTRYPOINT ["/usr/sbin/sshd"]
+CMD ["-D"]

@@ -1,0 +1,38 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "initial-server",
+    "labels": {
+      "app": "test"
+    }
+  },
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "test"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "test"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "ssh-server",
+            "image": "kali-ssh-server",
+			"imagePullPolicy": "Never",
+			"ports": [
+              {
+                "containerPort": 22
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

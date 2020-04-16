@@ -4,7 +4,7 @@ FROM kalilinux/kali-rolling
 
 # Install core apps
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-server
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-server iproute2
 
 # Configure SSH server
 
@@ -14,4 +14,5 @@ COPY authorized_keys /root/.ssh/
 RUN echo 'PermitRootLogin yes' > /etc/ssh/sshd_config
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+ENTRYPOINT ["/usr/sbin/sshd"]
+CMD ["-D"]
