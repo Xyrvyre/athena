@@ -5,6 +5,7 @@ namespace Athena.Data
 {
     public class AthenaContext : DbContext
     {
+     
         public AthenaContext(DbContextOptions<AthenaContext> options)
             : base(options)
         {
@@ -12,6 +13,7 @@ namespace Athena.Data
 
         public DbSet<Label> Label { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Athena.Models.Template> Template { get; set; }
     }
 }
  

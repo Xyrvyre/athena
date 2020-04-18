@@ -26,7 +26,7 @@ namespace Athena.Controllers
             };
 
             // var serialisePod = JsonSerializer.Serialize<V1Pod>(pod, serialiseOptions);
-            var jsonFilePod = System.IO.File.ReadAllText("C:\\Users\\s\\source\\repos\\d.json");
+            var jsonFilePod = System.IO.File.ReadAllText("C:\\Users\\s\\source\\repos\\SecLab1\\Deployment\\1.json");
             var deployment = new V1Deployment();
             deployment = JsonSerializer.Deserialize<V1Deployment>(jsonFilePod, serialiseOptions);
 

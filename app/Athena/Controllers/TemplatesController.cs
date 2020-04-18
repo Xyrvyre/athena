@@ -1,28 +1,31 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Athena.Data;
 using Athena.Models;
 
 namespace Athena.Controllers
 {
-    public class LabelsController : Controller
+    public class TemplatesController : Controller
     {
         private readonly AthenaContext _context;
 
-        public LabelsController(AthenaContext context)
+        public TemplatesController(AthenaContext context)
         {
             _context = context;
         }
 
-        // GET: Labels
+        // GET: Templates
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Label.ToListAsync());
+            return View(await _context.Template.ToListAsync());
         }
 
-        // GET: Labels/Details/5
+        // GET: Templates/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,39 +33,39 @@ namespace Athena.Controllers
                 return NotFound();
             }
 
-            var label = await _context.Label
+            var template = await _context.Template
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (label == null)
+            if (template == null)
             {
                 return NotFound();
             }
 
-            return View(label);
+            return View(template);
         }
 
-        // GET: Labels/Create
+        // GET: Templates/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Labels/Create
+        // POST: Templates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Key,Value")] Label label)
+        public async Task<IActionResult> Create([Bind("Id,Path,Description,LabGuide")] Template template)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(label);
+                _context.Add(template);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(label);
+            return View(template);
         }
 
-        // GET: Labels/Edit/5
+        // GET: Templates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,22 +73,22 @@ namespace Athena.Controllers
                 return NotFound();
             }
 
-            var label = await _context.Label.FindAsync(id);
-            if (label == null)
+            var template = await _context.Template.FindAsync(id);
+            if (template == null)
             {
                 return NotFound();
             }
-            return View(label);
+            return View(template);
         }
 
-        // POST: Labels/Edit/5
+        // POST: Templates/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Key,Value")] Label label)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Path,Description,LabGuide")] Template template)
         {
-            if (id != label.Id)
+            if (id != template.Id)
             {
                 return NotFound();
             }
@@ -94,12 +97,12 @@ namespace Athena.Controllers
             {
                 try
                 {
-                    _context.Update(label);
+                    _context.Update(template);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LabelExists(label.Id))
+                    if (!TemplateExists(template.Id))
                     {
                         return NotFound();
                     }
@@ -110,10 +113,10 @@ namespace Athena.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(label);
+            return View(template);
         }
 
-        // GET: Labels/Delete/5
+        // GET: Templates/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,30 +124,30 @@ namespace Athena.Controllers
                 return NotFound();
             }
 
-            var label = await _context.Label
+            var template = await _context.Template
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (label == null)
+            if (template == null)
             {
                 return NotFound();
             }
 
-            return View(label);
+            return View(template);
         }
 
-        // POST: Labels/Delete/5
+        // POST: Templates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var label = await _context.Label.FindAsync(id);
-            _context.Label.Remove(label);
+            var template = await _context.Template.FindAsync(id);
+            _context.Template.Remove(template);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LabelExists(int id)
+        private bool TemplateExists(int id)
         {
-            return _context.Label.Any(e => e.Id == id);
+            return _context.Template.Any(e => e.Id == id);
         }
     }
 }
