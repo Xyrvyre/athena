@@ -54,7 +54,7 @@ namespace Athena.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Path,Description,LabGuide")] Template template)
+        public async Task<IActionResult> Create([Bind("Id,Path,About,Doc")] Template template)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Athena.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Path,Description,LabGuide")] Template template)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Path,About,Doc")] Template template)
         {
             if (id != template.Id)
             {

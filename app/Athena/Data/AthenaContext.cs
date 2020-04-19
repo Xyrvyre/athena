@@ -13,7 +13,7 @@ namespace Athena.Data
 
         public DbSet<Label> Label { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Athena.Models.Template> Template { get; set; }
+        public DbSet<Template> Template { get; set; }
     }
 }
  

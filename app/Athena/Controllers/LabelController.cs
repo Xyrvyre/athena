@@ -5,8 +5,10 @@ using k8s;
 using k8s.Models;
 using Microsoft.EntityFrameworkCore;
 using Athena.Data;
-using Athena.Models;
+
 using System.Collections.Generic;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Athena.Controllers
 {
@@ -19,28 +21,59 @@ namespace Athena.Controllers
         {
             _context = context;
         }
-
-        public async System.Threading.Tasks.Task<IActionResult> IndexAsync()
+        string userName = "default";
+        public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
             var client = new Kubernetes(k8SClientConfig);
             //var jsonFilePod = System.IO.File.ReadAllText("C:\\Users\\s\\source\\repos\\Dep_Kub\\d.json");
-            string p = @"C:\Users\s\source\repos\SecLab1\Deployment";
+            string p = "";
             string a = "class";//key
             string b = "SecurityL7"; // value
-            string c = "default"; // create the namespace when logging in
+             // create the namespace when logging in
 
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
             optionsBuilder.UseSqlServer("AthenaContext");
             using (var context = new AthenaContext(optionsBuilder.Options))
             {
-                var label = await _context.Label.FirstOrDefaultAsync(m => m.Value == "SecTestL7");
+                var label = await _context.Label.FirstOrDefaultAsync(m => m.Id == 1);
                             
                 a = label.Key;
                 b = label.Value;
+
+                var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == 1);
+
+                p = path.Path;
             }
+
+            //YAML
             
-           
+        /*var deserializeYAML = new DeserializerBuilder()
+              .WithNamingConvention(CamelCaseNamingConvention.Instance)
+              .Build();
+
+            foreach (string file in Directory.EnumerateFiles(p))
+            {
+                
+                StreamReader fileContent = System.IO.File.OpenText(file);
+
+                V1Deployment deployment = deserializeYAML.Deserialize<V1Deployment>(fileContent);
+                
+                if (deployment.Metadata.Labels == null)
+                {
+                    deployment.Metadata.Labels = new Dictionary<string, string>();
+                }
+
+                deployment.Metadata.Labels.Add("animal", "hare");
+                var result = client.CreateNamespacedDeployment(deployment, "default");
+
+                ViewData["Message"] = result;
+            }*/
+
+
+
+
+            //JSON
             var serialiseOptions = new JsonSerializerOptions()
             {
                 WriteIndented = true,
@@ -60,7 +93,7 @@ namespace Athena.Controllers
                 }
 
                 deployment.Metadata.Labels.Add(a, b);
-                var result = client.CreateNamespacedDeployment(deployment, c);
+                var result = client.CreateNamespacedDeployment(deployment, userName);
 
                 ViewData["Message"] = result;
             }
