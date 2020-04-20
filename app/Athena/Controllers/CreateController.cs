@@ -1,27 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Text.Json;
 using k8s;
 using k8s.Models;
 using Microsoft.EntityFrameworkCore;
 using Athena.Data;
-
 using System.Collections.Generic;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace Athena.Controllers
 {
-    public class LabelController : Controller
+    public class CreateController : Controller
     {
 
         private readonly AthenaContext _context;
 
-        public LabelController(AthenaContext context)
+        public CreateController(AthenaContext context)
         {
             _context = context;
         }
-        string userName = "default";
+        string userName = "default"; //get it from Login
         public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
@@ -47,8 +47,8 @@ namespace Athena.Controllers
             }
 
             //YAML
-            
-        /*var deserializeYAML = new DeserializerBuilder()
+           
+        var deserializeYAML = new DeserializerBuilder()
               .WithNamingConvention(CamelCaseNamingConvention.Instance)
               .Build();
 
@@ -64,14 +64,14 @@ namespace Athena.Controllers
                     deployment.Metadata.Labels = new Dictionary<string, string>();
                 }
 
-                deployment.Metadata.Labels.Add("animal", "hare");
+                deployment.Metadata.Labels.Add(a, b);
                 var result = client.CreateNamespacedDeployment(deployment, "default");
 
                 ViewData["Message"] = result;
-            }*/
+            }
+            
 
-
-
+            /*
 
             //JSON
             var serialiseOptions = new JsonSerializerOptions()
@@ -97,7 +97,8 @@ namespace Athena.Controllers
 
                 ViewData["Message"] = result;
             }
-            
+            */
+
             return View();
 
         }

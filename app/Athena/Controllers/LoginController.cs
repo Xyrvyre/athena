@@ -22,7 +22,7 @@ namespace Athena.Controllers
         {
             _context = context;
         }
-        string userName = "default";
+        string userName = "sky";
 
         public IActionResult Index()
         {
@@ -31,16 +31,9 @@ namespace Athena.Controllers
             var client = new Kubernetes(k8SClientConfig);
             // create the namespace when logging in
 
-            var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
-            optionsBuilder.UseSqlServer("AthenaContext");
-
-
-            using (var context = new AthenaContext(optionsBuilder.Options))
-            {
-                var label = _context.User.FirstOrDefaultAsync(m => m.UserId == "hyerim.kwon");
-
-                //userName = label.UserId;
-            }
+           // save username from google api into Database Namespace 
+                                        //and assign it to variable username
+                                        // take username to Createcontroller
 
             var ns = new V1Namespace
             {
