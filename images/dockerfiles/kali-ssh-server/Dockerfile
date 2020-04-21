@@ -4,7 +4,7 @@ FROM kalilinux/kali-rolling
 
 # Install core apps
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-server iproute2
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-server iproute2 iputils-ping
 
 # Configure SSH server
 

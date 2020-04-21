@@ -5,7 +5,7 @@ FROM kali-ssh-server
 
 # Install core apps
 
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-client nano iproute2
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openssh-client nano iproute2 iputils-ping
 
 # Install SSH private key
 
