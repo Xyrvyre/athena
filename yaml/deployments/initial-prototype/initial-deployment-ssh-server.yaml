@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kali-server-label
+  labels:
+    app: ssh-server
+    lab: initial
+spec:
+  selector:
+    matchLabels:
+      app: ssh-server
+  template:
+    metadata:
+      labels:
+        app: ssh-server
+        lab: initial
+    spec:
+      containers:
+        - name: ssh-server
+          image: kali-ssh-server
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 22

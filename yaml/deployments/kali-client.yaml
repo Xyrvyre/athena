@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: initial-client
+  name: kali-client
   labels:
-    app: test
+    app: ssh-client
 spec:
   selector:
     matchLabels:
-      app: test
+      app: ssh-client
   template:
     metadata:
       labels:
-        app: test
+        app: ssh-client
     spec:
       containers:
         - name: ssh-client

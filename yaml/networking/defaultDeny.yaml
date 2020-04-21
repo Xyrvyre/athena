@@ -1,13 +1,11 @@
 # Note: needs a Global policy as well
 
-kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
-  name: default-deny
-  namespace: <insert-namespace-here>
+  name: default-deny-all
 spec:
-  podSelector:
-    matchLabels: {}
-  types:
+  podSelector: {}
+  policyTypes:
   - Ingress
   - Egress
