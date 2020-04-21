@@ -1,0 +1,16 @@
+
+# Template version - DO NOT USE WITHOUT MODIFICATION
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-lab-only
+spec:
+  podSelector:
+    matchLabels:
+      <label-name>: <label-value>
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels: 
+            <label-name>: <label-value>

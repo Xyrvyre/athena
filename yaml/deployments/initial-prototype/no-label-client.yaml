@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kali-client
+  labels:
+    app: ssh-client
+spec:
+  selector:
+    matchLabels:
+      app: ssh-client
+  template:
+    metadata:
+      labels:
+        app: ssh-client
+    spec:
+      containers:
+        - name: ssh-client
+          image: kali-ssh-client
+          imagePullPolicy: Never
