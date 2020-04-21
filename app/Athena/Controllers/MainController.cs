@@ -14,11 +14,11 @@ using Athena.Data;
 
 namespace Athena.Controllers
 {
-    public class LoginController : Controller
+    public class MainController : Controller
     {
         private readonly AthenaContext _context;
 
-        public LoginController(AthenaContext context)
+        public MainController(AthenaContext context)
         {
             _context = context;
         }
