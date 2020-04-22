@@ -16,36 +16,35 @@ namespace Athena.Controllers
     public class CreateController : Controller
     {
         string p = "";
+        string userName = "testing"; 
+
         private readonly AthenaContext _context;
 
         public CreateController(AthenaContext context)
         {
             _context = context;
         }
-        //string userName = "default"; //get it from Login
-        public async System.Threading.Tasks.Task<IActionResult> Index()
+        
+        public async System.Threading.Tasks.Task<IActionResult> Index(string? id)
         {
-            //string userName = HttpContext.Session.GetString("namespace");
-            string userName = HttpContext.Session.GetString("namespace");
+            
+            userName = HttpContext.Session.GetString("namespace");
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
             var client = new Kubernetes(k8SClientConfig);
-            //var jsonFilePod = System.IO.File.ReadAllText("C:\\Users\\s\\source\\repos\\Dep_Kub\\d.json");
-            //string p = "";
-            string a = "class";//key
-            string b = "SecurityL7"; // value
-                                     // create the namespace when logging in
-
+           
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
             optionsBuilder.UseSqlServer("AthenaContext");
+            /*
             using (var context = new AthenaContext(optionsBuilder.Options))
             {
-                var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == 1);
+                var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == id);
 
                 p = path.Path;
 
             }
-
-            //YAML
+            */
+            p = id;
+            
 
             var deserializeYAML = new DeserializerBuilder()
                   .WithNamingConvention(CamelCaseNamingConvention.Instance)
@@ -76,10 +75,6 @@ namespace Athena.Controllers
             {
                 var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == id);
                 p = path.Path;
-
-
-                //HttpContext.Session.SetString("path", p);
- 
             }
 
             ViewBag.path = p;
