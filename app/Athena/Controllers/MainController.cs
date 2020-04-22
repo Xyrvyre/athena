@@ -24,27 +24,36 @@ namespace Athena.Controllers
         }
         string userName = "sky";
 
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(string UserId)
         {
-
+            userName = UserId;
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
             var client = new Kubernetes(k8SClientConfig);
             // create the namespace when logging in
 
-           // save username from google api into Database Namespace 
-                                        //and assign it to variable username
-                                        // take username to Createcontroller
+            // save username from google api into Database Namespace 
+            //and assign it to variable username
+            // take username to Createcontroller
 
+            // checking whether there is already a namespace
+            var namespaces = client.ListNamespace();
+            foreach (var n in namespaces.Items)
+            {
+                if (n.Metadata.Name == UserId) { return View(); } 
+            }
+            
             var ns = new V1Namespace
             {
                 Metadata = new V1ObjectMeta
                 {
-                    Name = userName
+                    Name = UserId
                 }
             };
 
             var result = client.CreateNamespace(ns);
             ViewData["Message"] = result;
+
             return View();
         }
     }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Athena.Models
 {
-    public class User
+    public class Path
     {
-        public string UserId { get; set; }
-
+        public string Folder { get; set; }
     }
 }

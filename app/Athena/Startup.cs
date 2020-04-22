@@ -28,6 +28,11 @@ namespace Athena
             services.AddControllersWithViews();
             services.AddDbContext<AthenaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("AthenaContext")));
+            services.AddSession(so =>
+            {
+                so.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
+            //services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

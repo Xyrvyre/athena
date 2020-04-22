@@ -24,13 +24,14 @@ namespace Athena.Controllers
 
         //get it from Login
         string userName = "default";
+        string p = "";
+
         public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
             var client = new Kubernetes(k8SClientConfig);
             
-            string p = "";
-            
+            /*
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
             optionsBuilder.UseSqlServer("AthenaContext");
             using (var context = new AthenaContext(optionsBuilder.Options))
@@ -38,12 +39,15 @@ namespace Athena.Controllers
                 var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == 1);
                 p = path.Path;
             }
-
+            */
             //YAML
            
         var deserializeYAML = new DeserializerBuilder()
               .WithNamingConvention(CamelCaseNamingConvention.Instance)
               .Build();
+
+            
+
 
             foreach (string file in Directory.EnumerateFiles(p))
             {
@@ -59,24 +63,37 @@ namespace Athena.Controllers
 
                 var result = client.CreateNamespacedDeployment(deployment, "default");
 
-                ViewData["Message"] = result;
+                ViewData["Message"] = p;
             }
                         
             return View();
         }
 
-        public IActionResult Template()
+
+        public async System.Threading.Tasks.Task<IActionResult> Template(int? id)
         {
 
 
+            //var path = _context.Template.FindAsync(id);
+            //p = path.
+            var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
+            optionsBuilder.UseSqlServer("AthenaContext");
+            using (var context = new AthenaContext(optionsBuilder.Options))
+            {
+                var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == id);
+                p = path.Path;
+                
+                //this.Session.SetString("path", p);
+            }
+
+            
+            ViewData["Message"] = p;
             return View();
         }
 
-        public IActionResult ChooseTemplate()
+        public async System.Threading.Tasks.Task<IActionResult> ChooseTemplate()
         {
-
-
-            return View();
+            return View(await _context.Template.ToListAsync());
         }
     }
 }

@@ -1,8 +1,24 @@
-﻿
+﻿@model IEnumerable<Athena.Models.Template>
+
 @{
     ViewData["Title"] = "ChooseTemplate";
 }
 
-    <h1>Choose a lab</h1>
+<h1>Choose a lab</h1>
 
-<a asp-area="" asp-controller="Create" asp-action="Template">Template 1</a>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a asp-controller="Create" asp-action="Template" asp-route-id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.Path)
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+    <!--generate the list from the database-->
+    <!--ChooseTemplate view -> CreateController Template action -> -->

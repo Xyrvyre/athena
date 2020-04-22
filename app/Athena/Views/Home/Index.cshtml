@@ -1,9 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <a asp-area="" asp-controller="Main" asp-action="Index">Log in</a>
-        <!--<a href="https://localhost:44378/Login">Log in link</a>-->
-    </div>
+    <script>
+        
+        $(document).ready(function () {
+            alert("Test");
+            $("#term").load("helloworld.html");
+
+        });
+    </script>
+
+
+@model IEnumerable<Athena.Models.User>
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<div id="term">
+    <h2>Click button to load new content inside DIV box</h2>
+</div>
+<form asp-controller="Main" asp-action="Index" method="post">
+    <input type="text" placeholder="Enter UserId" name="UserId" required>
+    <button type="submit">Login</button>
+</form>
+
+<a href="~/helloworld.html">link</a>
+<!--
+<iframe src="https://www.w3schools.com" width="600" height="400"></iframe>
+-->
+
+
+<!--
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <a asp-area="" asp-controller="Main" asp-action="Index">Log in</a>
+    <!--<a href="https://localhost:44378/Login">Log in link</a>
+        </div>
+        -->
