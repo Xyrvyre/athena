@@ -1,26 +1,35 @@
 ﻿
+    <head>
+        <style>
+            #term {
+                max-height: 300px;
+                max-width: 300px;
+            }
+        </style>
+        <script>
 
-    <script>
+            $(document).ready(function () {
+                
+                $("#term").load("vnc.html?hostname=localhost&port=32872");
+                $("#term").max-width("75%");
+                $("#term").max-height("75%");
+
+            });
+        </script>
         
-        $(document).ready(function () {
-            alert("Test");
-            $("#term").load("helloworld.html");
-
-        });
-    </script>
-
+    </head>
 
 @model IEnumerable<Athena.Models.User>
 
 @{
     ViewData["Title"] = "Log in";
 }
-<div id="term">
+<div id="term" class="viewer" width="400" height="400">
     <h2>Click button to load new content inside DIV box</h2>
 </div>
 <form asp-controller="Main" asp-action="Index" method="post">
-    <input type="text" placeholder="Enter UserId" name="UserId" required>
-    <button type="submit">Login</button>
+    <!-- <input type="text" placeholder="Enter UserId" name="UserId" required>
+    <button type="submit">Login</button> -->
 </form>
 
 <a href="~/helloworld.html">link</a>
