@@ -1,5 +1,9 @@
 ﻿
 @ViewData["Message"]
 <br />
-<a asp-area="" asp-controller="Create" asp-action="Index">Create Lab Environment</a>
 
+<a asp-area="" asp-controller="Create" asp-action="Index" asp-route-id="@ViewBag.path">
+
+        Create Lab Environment
+    </a>
+    <h1>@ViewBag.path</h1>

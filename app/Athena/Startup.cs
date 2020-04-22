@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Athena.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Athena
 {
@@ -25,13 +26,21 @@ namespace Athena
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+            
             services.AddControllersWithViews();
             services.AddDbContext<AthenaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("AthenaContext")));
-            services.AddSession(so =>
-            {
-                so.IdleTimeout = TimeSpan.FromMinutes(10);
-            });
+            
             //services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
         }
 
@@ -50,6 +59,7 @@ namespace Athena
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

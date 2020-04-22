@@ -9,8 +9,8 @@ using k8s;
 using k8s.Models;
 using Microsoft.EntityFrameworkCore;
 using Athena.Data;
-
-
+using Microsoft.AspNetCore.Http;
+using System.Collections;
 
 namespace Athena.Controllers
 {
@@ -28,6 +28,8 @@ namespace Athena.Controllers
         public IActionResult Index(string UserId)
         {
             userName = UserId;
+            HttpContext.Session.SetString("namespace", UserId);
+
             var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
             var client = new Kubernetes(k8SClientConfig);
             // create the namespace when logging in
@@ -40,7 +42,9 @@ namespace Athena.Controllers
             var namespaces = client.ListNamespace();
             foreach (var n in namespaces.Items)
             {
-                if (n.Metadata.Name == UserId) { return View(); } 
+                if (n.Metadata.Name == UserId) 
+                { //ViewData["Message"] = HttpContext.Session.GetString("namespace");
+                    return View(); } 
             }
             
             var ns = new V1Namespace
