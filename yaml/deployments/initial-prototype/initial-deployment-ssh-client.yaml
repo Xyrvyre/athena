@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kali-client-label
+  name: kali-client
   labels:
     app: ssh-client
     lab: initial
@@ -17,5 +17,8 @@ spec:
     spec:
       containers:
         - name: ssh-client
-          image: kali-ssh-client
+          image: kali-client
           imagePullPolicy: Never
+          ports:
+            - containerPort: 22
+            - containerPort: 80
