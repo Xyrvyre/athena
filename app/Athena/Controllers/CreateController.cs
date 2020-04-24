@@ -56,7 +56,7 @@ namespace Athena.Controllers
                // ViewData["Message"] = result;
 
             }
-            /*
+            
             foreach (string file in Directory.EnumerateFiles(pDeployments))
             {
 
@@ -69,7 +69,7 @@ namespace Athena.Controllers
                 ViewData["Message"] = result;
 
             }
-            */
+            
             
             return View();
             
