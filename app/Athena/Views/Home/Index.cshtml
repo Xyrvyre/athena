@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<!--
 <script>
     window.location.href = 'https://www.google.com';
@@ -12,18 +13,45 @@
     window.open("servicename.namespace.domainname");
 </script>
 -->
+=======
+﻿
+    <head>
+        <style>
+            #term {
+                max-height: 300px;
+                max-width: 300px;
+            }
+        </style>
+        <script>
+
+            $(document).ready(function () {
+                
+                $("#term").load("vnc.html?hostname=localhost&port=32872");
+                $("#term").max-width("75%");
+                $("#term").max-height("75%");
+
+            });
+        </script>
+        
+    </head>
+>>>>>>> parent of 0c466e3... Revert "Fixed VNC"
 
 @model IEnumerable<Athena.Models.User>
 
 @{
     ViewData["Title"] = "Log in";
 }
+<<<<<<< HEAD
 <div id="term">
     <h2>Click to load new content inside DIV box</h2>
+=======
+<div id="term" class="viewer" width="400" height="400">
+    <h2>Click button to load new content inside DIV box</h2>
+>>>>>>> parent of 0c466e3... Revert "Fixed VNC"
 </div>
 <form asp-controller="Main" asp-action="Index" method="post">
-    <input type="text" placeholder="Enter UserId" name="UserId" required>
-    <button type="submit">Login</button>
+    <!-- <input type="text" placeholder="Enter UserId" name="UserId" required>
+    <button type="submit">Login</button> -->
 </form>
 <iframe src="http://192.168.99.101:30192/" width="600" height="400"></iframe>
 
