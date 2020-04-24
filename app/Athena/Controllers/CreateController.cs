@@ -44,19 +44,6 @@ namespace Athena.Controllers
                   .WithNamingConvention(CamelCaseNamingConvention.Instance)
                   .Build();
 
-            foreach (string file in Directory.EnumerateFiles(pDeployments))
-            {
-
-                StreamReader fileContent = System.IO.File.OpenText(file);
-
-                V1Deployment deployment = deserializeYAML.Deserialize<V1Deployment>(fileContent);
-
-                var result = client.CreateNamespacedDeployment(deployment, userName);
-                
-                //ViewData["Message"] = result;
-
-            }
-
             foreach (string file in Directory.EnumerateFiles(pServices))
             {
 
@@ -69,6 +56,21 @@ namespace Athena.Controllers
                // ViewData["Message"] = result;
 
             }
+            /*
+            foreach (string file in Directory.EnumerateFiles(pDeployments))
+            {
+
+                StreamReader fileContent = System.IO.File.OpenText(file);
+
+                V1Deployment deployment = deserializeYAML.Deserialize<V1Deployment>(fileContent);
+
+                var result = client.CreateNamespacedDeployment(deployment, userName);
+                
+                ViewData["Message"] = result;
+
+            }
+            */
+            
             return View();
             
         }
