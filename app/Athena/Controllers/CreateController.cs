@@ -25,7 +25,7 @@ namespace Athena.Controllers
             _context = context;
         }
         
-        public async System.Threading.Tasks.Task<IActionResult> Index(string? id)
+        public async System.Threading.Tasks.Task<IActionResult> Index()
         {
             
             userName = HttpContext.Session.GetString("namespace");
@@ -34,23 +34,17 @@ namespace Athena.Controllers
            
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
             optionsBuilder.UseSqlServer("AthenaContext");
-            /*
-            using (var context = new AthenaContext(optionsBuilder.Options))
-            {
-                var path = await _context.Template.FirstOrDefaultAsync(m => m.Id == id);
+           
+            p = HttpContext.Session.GetString("path");
 
-                p = path.Path;
-
-            }
-            */
-            p = id;
-            
+            var pDeployments = p + "Deployments";
+            var pServices = p + "Services";
 
             var deserializeYAML = new DeserializerBuilder()
                   .WithNamingConvention(CamelCaseNamingConvention.Instance)
                   .Build();
 
-            foreach (string file in Directory.EnumerateFiles(p))
+            foreach (string file in Directory.EnumerateFiles(pDeployments))
             {
 
                 StreamReader fileContent = System.IO.File.OpenText(file);
@@ -58,17 +52,32 @@ namespace Athena.Controllers
                 V1Deployment deployment = deserializeYAML.Deserialize<V1Deployment>(fileContent);
 
                 var result = client.CreateNamespacedDeployment(deployment, userName);
+                
+                //ViewData["Message"] = result;
 
-                ViewData["Message"] = result;
+            }
+
+            foreach (string file in Directory.EnumerateFiles(pServices))
+            {
+
+                StreamReader fileContent = System.IO.File.OpenText(file);
+
+                V1Service service = deserializeYAML.Deserialize<V1Service>(fileContent);
+
+                var result = client.CreateNamespacedService(service, userName);
+
+               // ViewData["Message"] = result;
+
             }
             return View();
+            
         }
 
 
-        public async System.Threading.Tasks.Task<IActionResult> Template(int? id)
+        public async System.Threading.Tasks.Task<IActionResult> Template(string id)
         {
 
-
+            /*
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();
             optionsBuilder.UseSqlServer("AthenaContext");
             using (var context = new AthenaContext(optionsBuilder.Options))
@@ -78,6 +87,8 @@ namespace Athena.Controllers
             }
 
             ViewBag.path = p;
+            */
+            HttpContext.Session.SetString("path", id);
             return View();
         }
 
@@ -85,6 +96,6 @@ namespace Athena.Controllers
         {
             return View(await _context.Template.ToListAsync());
         }
-        
+
     }
 }
