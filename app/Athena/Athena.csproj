@@ -17,4 +17,8 @@
     <PackageReference Include="YamlDotNet" Version="8.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\ViewLab\" />
+  </ItemGroup>
+
 </Project>
