@@ -2,9 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: test-lab-client-terminal
+  labels:
+    lab: initial
 spec:
   type: NodePort
   selector:
+    lab: initial
     app: ssh-client
   ports:
     - port: 80
