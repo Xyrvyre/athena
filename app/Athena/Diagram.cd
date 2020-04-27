@@ -8,24 +8,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Athena.Models.Template">
-    <Position X="3.5" Y="3.75" Width="1.5" />
+    <Position X="3" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAMAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Template.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Athena.Controllers.CreateController">
-    <Position X="5.75" Y="1" Width="1.5" />
+  <Class Name="Athena.Controllers.ViewLabController">
+    <Position X="6.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAABAAAAAAAAAAgAAAAAAAAAAEAAAEAAAA=</HashCode>
-      <FileName>Controllers\CreateController.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ViewLabController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Athena.Controllers.MainController">
-    <Position X="3.5" Y="1" Width="1.5" />
+  <Class Name="Athena.Controllers.EndLabController">
+    <Position X="8.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAEAAAEAAAA=</HashCode>
-      <FileName>Controllers\MainController.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\EndLabController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Athena.Controllers.HomeController">
@@ -33,6 +33,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Athena.Controllers.MainController">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAEAAAEAAAA=</HashCode>
+      <FileName>Controllers\MainController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Athena.Controllers.CreateController">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAABAAAAAAAAAAgAAAAAAAAAEEAAAEAAAA=</HashCode>
+      <FileName>Controllers\CreateController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
