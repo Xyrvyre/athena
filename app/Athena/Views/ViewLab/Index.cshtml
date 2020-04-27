@@ -5,9 +5,23 @@
 </script>
 
 
-
+<!--
 <input type="button" value="Toggle Service" onclick="history.go(0)" />
+-->
 
+<button onClick="window.location.reload();">Toggle Service</button>
+
+<table>
+@foreach (var item in ViewBag.IPADD)
+{
+    <tr>
+        <td>
+            @item
+        </td>
+        
+    </tr>
+}
+</table>
 
 <a asp-controller="EndLab" asp-action="Index">
     End Lab

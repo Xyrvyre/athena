@@ -25,13 +25,18 @@ namespace Athena.Controllers
             // This list could be displayed to user to choose a lab to view. 
             // If this was stored in a database table (eg. 'Active Deployments' ) it could have a 'pretty name' associated with it
             // eg. instead of printing 'kali-ssh-server' you could look up 'kali-ssh-server' in table and  print 'Remote Client Device', its 'pretty name'
-
+            
+            IList<string> ipAdd = new List<string>();
             foreach (var item in labDeployments.Items)
             {
-                ViewData["Message"] =item.Metadata.Name;
-            }
+                var deploymentPod = client.ListNamespacedPod(userName, null, null, null, "lab = " + labName + ",app = " + item.Metadata.Labels["app"]);
+                
+                ipAdd.Add((deploymentPod.Items.First()).Status.PodIP);
 
-            
+                //ViewData["Message"] =(deploymentPod.Items.First()).Status.PodIP;
+            }
+            ViewBag.IPADD = ipAdd;
+
             var viewerService = client.ListNamespacedService(userName, null, null, null, "lab = " + labName).Items.First();
 
             
