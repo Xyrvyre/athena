@@ -9,7 +9,7 @@ spec:
   clusterIP: 10.100.100.100
   selector:
     lab: initial
-    app: ssh-client
+
   ports:
     - port: 80
       targetPort: 80
