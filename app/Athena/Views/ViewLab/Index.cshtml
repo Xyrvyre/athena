@@ -1,14 +1,12 @@
 ﻿
 <script>
-    window.open("http://192.168.99.101:31977", "Popup", "width=400,height=400");
+    window.open("http://192.168.99.101:31000", "Popup", "width=400,height=400");
     //"servicename.namespace.domainname"
 </script>
 
 
-@{
-    ViewData["Title"] = "View Lab";
-}
 
+<input type="button" value="Toggle Service" onclick="history.go(0)" />
 
 
 <a asp-controller="EndLab" asp-action="Index">
