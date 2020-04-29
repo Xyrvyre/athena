@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webgoat
+  labels:
+    app: webgoat
+    lab: webgoat
+spec:
+  selector:
+    matchLabels:
+      app: webgoat
+      lab: webgoat
+  template:
+    metadata:
+      labels:
+        lab: webgoat
+        app: webgoat
+    spec:
+      containers:
+          - name: webgoat
+            image: webgoat/goatandwolf
+            workingDir: /home/webgoat
+            ports:
+            - containerPort: 8080
+            - containerPort: 9090
+            - containerPort: 8888
