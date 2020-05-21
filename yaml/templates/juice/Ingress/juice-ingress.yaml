@@ -4,14 +4,14 @@ metadata:
   name: ingress-juice
   labels:
     lab: juice-shop
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2 
+    internalPath: "/$2"
+    regex: "(/|$)(.*)"
 spec:
   rules:
   - host: athena.local
     http:
       paths:
-      - path: /default/juiceshop(/|$)(.*)
+      - path: /default/juiceshop
         backend:
           serviceName: juice-shop-interface
           servicePort: 80
