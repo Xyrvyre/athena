@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: <ingress-name>
+  labels:
+    internalPath: <path that the ingress will request - if not supplied, ingress will request HOST.TLD/PATH/TO/FILE (the path the user sees)>
+    regex: <optional regex pattern which can be appended to the end of the path. 
+    
+#   Example: /PATH/TO(/|$)(.*) in conjunction with internalPath of /$2  will direct traffic for HOST.TLD/PATH/TO/* to the listed backend service. This traffic will appear to be requesting /(.*) (the second regex capture group)
+
+spec:
+  rules:
+  - host: <hostname>
+    http:
+      paths:
+      - path: <path-that-user-will-see>
+        backend:
+          serviceName: <service-name>
+          servicePort: <service-port>
+      - path: <path-that-user-will-see>
+        backend:
+          serviceName: <service-name>
+          servicePort: <service-port>
+		  

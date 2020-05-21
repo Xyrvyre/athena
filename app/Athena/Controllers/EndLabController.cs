@@ -10,7 +10,7 @@ namespace Athena.Controllers
         public IActionResult Index()
         {
             string userName = HttpContext.Session.GetString("namespace");
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile("./config");
             var client = new Kubernetes(k8SClientConfig);
 
             var list = client.ListNamespacedDeployment(userName, null, null, null, "lab = initial");

@@ -30,7 +30,7 @@ namespace Athena.Controllers
             userName = UserId;
             HttpContext.Session.SetString("namespace", UserId);
 
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile("./config");
             var client = new Kubernetes(k8SClientConfig);
             // create the namespace when logging in
 

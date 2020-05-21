@@ -29,7 +29,7 @@ namespace Athena.Controllers
         {
             
             userName = HttpContext.Session.GetString("namespace");
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile("./config");
             var client = new Kubernetes(k8SClientConfig);
            
             var optionsBuilder = new DbContextOptionsBuilder<AthenaContext>();

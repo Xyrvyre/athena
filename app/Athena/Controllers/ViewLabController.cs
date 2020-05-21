@@ -17,7 +17,7 @@ namespace Athena.Controllers
             // Get deployments (assuming namespace and lab name known already) - guessing this would need an 'Active Labs' table w. Lab Name and user namespace. 
             var userName = "theo";
             var labName = "initial";
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile("./config");
             var client = new Kubernetes(k8SClientConfig);
 
             var labDeployments = client.ListNamespacedDeployment(userName, null, null, null, "lab = " + labName);
@@ -39,7 +39,7 @@ namespace Athena.Controllers
 
             var viewerService = client.ListNamespacedService(userName, null, null, null, "lab = " + labName).Items.First();
 
-            
+            string variablestring = "C:/Users/Laptop User/Documents/GitHub/athena/app/Athena/Startup.cs";
             // Hardcoded toggle (would not normally be present)
             string userChoice;
             if (viewerService.Spec.Selector["app"] == "ssh-server")

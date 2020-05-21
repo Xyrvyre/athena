@@ -5,7 +5,6 @@ metadata:
   labels:
     lab: initial
 spec:
-  type: NodePort
   selector:
     lab: initial
     app: ssh-client

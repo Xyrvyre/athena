@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vnc
+  labels:
+    app: vnc
+spec:
+  selector:
+    matchLabels:
+      app: vnc
+  template:
+    metadata:
+      labels:
+        app: vnc
+    spec:
+      containers:
+        - name: vnc-server
+          image: xyrvyre/athena:vncs
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 22
+            - containerPort: 5900
+        - name: vnc-client
+          image: xyrvyre/athena:vncs
+          ports:
+            - containerPort: 80
