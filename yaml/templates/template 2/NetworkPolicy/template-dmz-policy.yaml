@@ -1,0 +1,19 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: dmz-policy
+spec:
+  podSelector:
+    matchLabels:
+      lab: example
+      net: dmz
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels: 
+            lab: example
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            lab: example

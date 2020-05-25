@@ -2,4 +2,4 @@
 
 FROM nginx
 
-COPY vnc.html /var/www/html/
+COPY vnc/ /usr/share/nginx/html

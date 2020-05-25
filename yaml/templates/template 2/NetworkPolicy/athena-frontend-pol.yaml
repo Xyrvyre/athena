@@ -1,0 +1,25 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: athena-frontend-pol
+spec:
+  podSelector:
+    matchLabels:
+      role: frontend
+      app: athena
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels: 
+            app: athena
+            role: db
+      - ipBlock: # Client IP range
+        cidr: 10.10.1.0/24 
+  egress:
+    - to:
+      - podSelector:
+          matchLabels: 
+            app: athena
+            role: db
+      - ipBlock: # Client IP range
+        cidr: 10.10.1.0/24 

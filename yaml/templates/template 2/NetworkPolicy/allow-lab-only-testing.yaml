@@ -1,0 +1,15 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-lab-only
+spec:
+  podSelector:
+    matchLabels:
+      lab: example
+  ingress:
+    - from:
+      - ipBlock:
+        cidr: 10.10.1.0/24  # Local network range
+      - podSelector:
+          matchLabels: 
+            lab: example

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kali-attacker
+  labels:
+    lab: example
+    system: attacker
+spec:
+  selector:
+    matchLabels:
+      lab: example
+      system: attacker
+  template:
+    metadata:
+      labels:
+        lab: example
+        system: attacker
+    spec:
+      containers:
+        - name: kali-attacker
+          image: xyrvyre/athena:kali-gui-base-alt
+          ports:
+            - containerPort: 8080
+            - containerPort: 5900
+        - name: kali-vnc
+          image: xyrvyre/athena:vnc-client
+          ports:
+            - containerPort: 80
+            
+
