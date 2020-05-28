@@ -21,3 +21,6 @@ spec:
           image: #DATABASE IMAGE HERE
           ports:
             - containerPort: 1433
+          env:
+            - name:
+              value:

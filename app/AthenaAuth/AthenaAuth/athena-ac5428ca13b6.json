@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "athena-276205",
+  "private_key_id": "ac5428ca13b64399d26264f698b7749987525f56",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCZtriVWF8XIcDH\nfpwBbt/qh8GX/3f5+ZL7Ivmg/boG3hNiMOBqMj+34NYokaNR+fZjdglrfyQaizKC\n3G9ImdHuLMFKPmeY7aO38MT0vF8a2iTDB/sOOkCSC3LYPXMJ5Bjq0f8A+yPj/kn9\n0LbHCdiy/qO3k9SNQNSIgmM9BxeN7F7qOJGm7hSd+f+Il/B1422OsXIbH+XiBFyx\nJX4kPyq7S3MZrHIHy6r5sxT+Ov8ByVA0oROk4+qMSFJ8SAX0wBlN0ugImB2g9gwc\n7KO+z76I/pCv01qzoQp6wz2yCHxEIs9pp0W5dRdqv1ARUasAmi+WK5Siep+UyLWn\n1+7fJ5wfAgMBAAECggEABIX3cDTonrdHA12sbk2jUkxkxL++hVtcx7g38Wv0ixeO\nQKZdvPakfV8ZUSXCLjsyd6sso2z+MbeWi6i8O2yyog9yXn+qKjpyi9DIuA0mqMPP\nUjjU/Y5fdj40APcyUcwC6SeI04Gns3Mh17ptI5jWwxfa1vFkWu6rGD5feIAXp1oC\nKJoEhoFG8ucsllj9eY5nCzfQjvp85wc7m0c+G73mFzbxU1ZIiZwczd0lHhrupOvA\nWkWcIeUVLwCfob/A2c5qBM1eBDCUh8y+4o9QLHmaUoSJXm20x2UI9xcGFB70UctT\njj5wDjjE1nLPhl8kNuhLRH1L0U7nCuQJZ87ZJAc/wQKBgQDVacJ5MQAuzqKxiKY7\nH6DUBEu2qejnXNBwZo7aaHxKkT/UrK6/9ZYsQeLmY8JnTereXVabDm3oPjtsWYQF\nCb7/rtPCxPptyt40RyQqT9NZTmAQE0DHfzIkSFPdPb2HicvanUyCCY4EsRt5Bc0v\nya2xpOsyL5Sj6aM+9Zvl50Ar0QKBgQC4YzXeFMOKdYrgXqI1AtFNhHeGdQi4FhE6\nqYsi3dzwhlhknAJ3gnibliz+5DiVZ7f/XZVCkSKA5+NsWXDNkaIm7Uy6PGSPa7rO\n7MgWXQLIKp/SG6trKdzVrA2F7cWfvuZhXcTSd3x5FsyuE2TDM+ltf739mt3sd3+8\nzg15LSR07wKBgQDK0Ela9zBfS0zePykLAxHKq5Jws6R9S31jdHPKKIYGL2dj6//e\nubvPr4W8wY2cszXDwRxvGxVkItBCNgf66bo0Lqdcb+o2sRbew8Ug2N/X/V3ZqRJl\nBQJX7MyWcvhNeKzcw6RT6FSpLM8ZAmRvR9DkBADonsM5yu2zBaL0qAIaIQKBgQCE\ns3ILOKpaNaoTPEhFGpgDz/gtnoD963PO4kIuf7oIqMdo8RadaBrg7r3HW/yVGiZD\n9Nf9JnLMjxcP3Xbfm5Y1qcb0qY494ex6C9MctSfRY0vObPd7ko9KgB7janI2O6+W\nF2QVjMTaaNw5099K1UuD8NGNeS2Kh545BZqQwTphpQKBgQChb1VPHmzhVblv16JF\nSdFRus22aken+tbSqI8BDDesvyVAs9kX4+drO3Slkvgl0A38mSwzfldkJsxhLNZz\n8i73m/lgJKnTUoeo4qphAOVeuer6Tnj5CKpPSlCMiO0ecD3Q52bbpcdpVMqSvwNa\n0ZQhwNPEkuPFpciNRYFPFIf+mg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "athena-admin@athena-276205.iam.gserviceaccount.com",
+  "client_id": "112381359420531618039",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/athena-admin%40athena-276205.iam.gserviceaccount.com"
+}

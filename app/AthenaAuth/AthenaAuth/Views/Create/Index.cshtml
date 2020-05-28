@@ -1,0 +1,46 @@
+﻿<style>
+    .square {
+        width: 300px;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: darkseagreen;
+        font-size: 1.8rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-color: #006400;
+        border-style: solid
+    }
+    a:hover {
+        color: #009900
+    }
+    #head {
+        font-size: 2.5rem;
+        justify-content: center;
+        align-items: center;
+
+    }
+    #text {
+        font-size: 1.5rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+@ViewData["Message"]
+<div id="head">
+    Your Lab Environment has been created!
+</div>
+<div id="text">
+    Please note that it may take some time for all lab systems to launch.
+</div>
+
+<div >
+    <a class="square" asp-area="" asp-controller="ViewLab" asp-action="Index" style="color:#006400" >
+        Open Lab Interface
+    </a>
+</div>

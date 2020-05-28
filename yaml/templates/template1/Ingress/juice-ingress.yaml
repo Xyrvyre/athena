@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    athena-regex: (/|$)(.*)
+    athena-regex-replace: / 
+  labels:
+    lab: juice-shop
+  name: ingress-juice
+spec:
+  rules:
+    - host: athena.err0r.stream
+      http:
+        paths:
+          - backend:
+              serviceName: juice-shop-interface
+              servicePort: 80  
+            path: /default/juiceshop/testing(/|$)(.*)
+  tls:
+  - hosts:
+    - athena.err0r.stream
+    secretName: athena

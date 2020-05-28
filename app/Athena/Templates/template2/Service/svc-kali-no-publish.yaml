@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kali-no-publish
+  labels:
+    lab: example
+    system: attacker
+    net: external
+spec:
+  selector:
+    lab: example
+    system: attacker
+    net: external
+  ports:
+    - name: vnc
+      port: 5900
+      targetPort: 5900

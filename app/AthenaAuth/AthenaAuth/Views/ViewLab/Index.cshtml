@@ -1,0 +1,91 @@
+﻿   
+
+
+<style>
+
+
+
+    .end {
+        width: 150px;
+        height: 50px;
+        background-color: #c94f4f;
+        font-size: 1.5rem;
+        font-weight: 500;
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-color: #961d1d;
+        border-style: solid;
+        
+    }
+
+    #container {
+        width: auto;
+    }
+
+    #left {
+        width: 40%;
+        display: inline-block;
+    }
+    #right {
+        width: 30%;
+        float: right;
+    }
+   
+</style>
+
+
+<div id="container">
+<div id="left">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    System name
+                </th>
+                <th>IP address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.IPADD)
+            {
+                <tr>
+                    <td>
+                        @item.Key
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="right">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Interfaces
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.ingress)
+        {
+            <tr>
+                <td><a href="@item.Value" target="_blank">@item.Key</a></td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+</div>
+    </div>
+<div >
+    <a class="end" asp-controller="EndLab" asp-action="Index" onclick="return confirm_alert(this);" style="color: #6c1414">
+        End Lab
+    </a>
+</div>

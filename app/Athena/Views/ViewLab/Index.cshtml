@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "View Lab";
+}
+
+<script>
+    function Wait() {
+        alert("Please wait for a few minutes till the docker containers are prepared.");
+    }
+</script>
+<style>
+    .square {
+        width: 400px;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: darkseagreen;
+        font-size: 2.5rem;
+        font-weight: 300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #container {
+        width: auto;
+    }
+
+    #left {
+        width: 40%;
+        display: inline-block;
+    }
+
+    #right {
+        width: 30%;
+        float: right;
+    }
+</style>
+
+
+<div id="container">
+    <div id="left">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        System name
+                    </th>
+                    <th>IP address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.IPADD)
+                {
+                    <tr>
+                        <td>
+                            @item.Value
+                        </td>
+                        <td>
+                            @item.Key
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="right">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Interfaces
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.ingress)
+                {
+                    <tr>
+                        <td><a href="@item.Key" target="_blank" class="btn btn-primary">@item.Value</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<a asp-controller="EndLab" asp-action="Index" onclick="return confirm('Are you sure you want to end this Lab?');" class="btn btn-primary" style="background-color: darkred">
+    End Lab
+</a>
+
+

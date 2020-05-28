@@ -1,0 +1,51 @@
+﻿@model GroupSearch
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2>Group Users</h2>
+
+<a asp-area="" asp-controller="Group_User" asp-action="Create" asp-route-id="@Model.group.GroupId">
+    Add User
+</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                UserId
+            </th>
+            <th>
+               UserName
+            </th>
+            <th>
+                Email
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.group_user)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+
+                <td>
+                    <a asp-controller="Group_User" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Index">Back to List</a>

@@ -1,0 +1,43 @@
+﻿@model GroupSearch
+
+@{
+    ViewData["Title"] = "Group Templates";
+}
+
+<h2>Group Templates</h2>
+
+<a asp-area="" asp-controller="Group_Template" asp-action="Create" asp-route-id="@Model.group.GroupId">
+    Add Template
+</a>
+
+
+<table class="table">
+    <tr>
+        <th>
+            TemplateName
+        </th>
+        <th>
+            Path
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.group_template)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Template.TemplateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Template.Path)
+            </td>
+            <td>
+                <a asp-area="" asp-controller="Group_Template" asp-action="Delete" asp-route-id="@item.Id">
+                    Delete Template
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<a asp-action="Index">Back to List</a>
