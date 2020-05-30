@@ -31,8 +31,8 @@ namespace Athena.Controllers
         {
 
             userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+           
+            var k8SClientConfig = KubernetesClientConfiguration.BuildDefaultConfig();
             var client = new Kubernetes(k8SClientConfig);
 
 
@@ -43,10 +43,10 @@ namespace Athena.Controllers
             HttpContext.Session.SetInt32("TemplateId", id);
             
 
-            var pDeployments = p + "Deployment";
-            var pServices = p + "Service";
-            var pIngress = p + "Ingress";
-            string pNetPol = p + "NetworkPolicy";
+            var pDeployments = "Templates/" + p + "/Deployment";
+            var pServices = "Templates/" + p + "/Service";
+            var pIngress = "Templates/" + p + "/Ingress";
+            string pNetPol = "Templates/" + p + "/NetworkPolicy";
             
             try
             {

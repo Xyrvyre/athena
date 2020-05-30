@@ -5,9 +5,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    athena-regex: (/|$)(.*)
-    athena-regex-replace: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    athena-regex: (.*)
   labels:
     lab: example    
 spec:
@@ -15,7 +14,7 @@ spec:
   - host: athena.err0r.stream
     http:
       paths:
-      - path: /example/ubuntu/vnc(/|$)(.*)
+      - path: /example/ubuntu/vnc/(.*)
         backend:
           serviceName: ubuntu-vnc
           servicePort: 80
@@ -23,11 +22,11 @@ spec:
         backend:
           serviceName: ubuntu-no-publish
           servicePort: 5900
-      - path: /example/ubuntu/tty(/|$)(.*)
+      - path: /example/ubuntu/tty/(.*)
         backend:
           serviceName: ubuntu-tty
           servicePort: 8080
-      - path: /example/kali/vnc(/|$)(.*)
+      - path: /example/kali/vnc/(.*)
         backend:
           serviceName: kali-vnc
           servicePort: 80
@@ -35,7 +34,7 @@ spec:
         backend:
           serviceName: kali-no-publish
           servicePort: 5900
-      - path: /example/kali/tty(/|$)(.*)
+      - path: /example/kali/tty/(.*)
         backend:
           serviceName: kali-tty
           servicePort: 8080

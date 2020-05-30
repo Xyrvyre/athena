@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-athena
+  namespace: athena
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  labels:
+    app: athena
+spec:
+  rules:
+  - host: athena.local
+    http:
+      paths:
+      - path: /app(/|$)(.*)
+        backend:
+          serviceName: athena-app
+          servicePort: 80
+
+  tls:
+    - hosts:
+      - athena.err0r.stream
+      secretName: athena

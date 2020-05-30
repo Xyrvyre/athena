@@ -10,17 +10,11 @@ spec:
       lab: juice-shop
   ingress:
     - from:
-      - podSelector:
-          matchLabels: 
-            lab: juice-shop
       - namespaceSelector:
           matchLabels:
             app.kubernetes.io/name: ingress-nginx
   egress:
     - to:
-      - podSelector:
-          matchLabels:
-            lab: juice-shop
       - namespaceSelector:
           matchLabels:
             app.kubernetes.io/name: ingress-nginx

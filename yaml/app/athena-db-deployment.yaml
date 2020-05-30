@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: athena-database
+  labels:
+    app: athena   
+    role: database
+spec:
+  selector:
+    matchLabels:
+      name: athena   
+      role: database
+  template:
+    metadata:
+      labels:
+        name: athena   
+        role: database
+    spec:
+      containers:
+        - name: athena-db
+          image: #DATABASE IMAGE HERE
+          ports:
+            - containerPort: 1433
+          env:
+            - name:
+              value:

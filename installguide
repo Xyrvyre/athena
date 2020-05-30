@@ -1,0 +1,51 @@
+The provided installation script will install Docker and Kubernetes according to the processes outlined at the links below:
+
+ - Docker
+ - Kubernetes Docker config
+ - Kubernetes installation
+ 
+Once Kubernetes and Docker are installed, one can initialise the Kubernetes cluster using the kubeadm init command. This command will either accept arguments from the command line, or will read the equivalent values from a config file supplied by the user. 
+
+The provided config file contains the configuration we suggest - please review the values for 'pod-cidr' and 'cluster-cidr' as these will be the IP address ranges used for Pod and Cluster IPs respectively. We also strongly recommend that control-plane-node value is configured with a valid DNS name which resolves to at least one master Node IP address. This value must be set at cluster initialisation, and is used by worker Nodes to locate a master Node (should it be set). This allows for greater flexibility in changing the makeup of the master Node pool - should one add another master Node, traffic from worker Nodes can be split between the master Nodes using DNS-based load-balancing, and moving the master Node to a different IP address is greatly simplified.
+
+Once the cluster has been initialised, the kubeadm init command will output a 'join string' which can be entered on each worker Node to join it to the cluster.
+
+At this stage, you should install a Container Network Interface (CNI plugin using the kubectl apply -f <CNI.yaml> command in order to enable full networking functionality. We have supplied a slightly-modified Calico YAML file which uses IPIP encapsulation for cross-subnet traffic -- we feel that this provides a good balance between performance and flexibility, as Nodes in the same subnet can communicate without the added overhead of IPIP encapsulation, while retaining the original cluster-internal routing information of the packet in situations where it is more likely to be modified. Should one wish to use the standard Calico installation, one can find a unchanged version on the Project Calico website (docs.projectcalico.org/getting-started/kubernetes/self-managed-onprem/onpremises).
+
+Once a CNI has been installed, the next step is to install MetalLB, a plugin which enables LoadBalancer Service functionality for bare-metal Kubernetes clusters. The following commands are taken directly from the MetalLB installation guide and are reproduced here for the sake of convenience.
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
+Once MetalLB is installed, it must be configured before it becomes operational. We have supplied a basic configuration file which configures MetalLB to advertise LoadBalancer IP addresses at Layer 2 -- this configuration will almost certainly need to be modified to reflect the IP address ranges which MetalLB can assign IP addressses from. More information about MetalLB (including additional configuration material) can be found at https://metallb.universe.tf.
+
+The LAST?? step is to install ingress-nginx. Once again, we have supplied a slightly-modified version of the default 'bare-metal' configuration. Changes made include:
+
+ - Changing the ingress-nginx configuration so that ingress-nginx uses a LoadBalancer service rather than a  NodePort service for external connectivity
+ 
+ - Changing the 'Ingress Class' value to be 'nginx-athena'. This matches the 'kubernetes.io/ingress.class: nginx-athena' annotation which must be on all Ingresses used in Lab Templates
+ 
+ At this point, the cluster is ready for  deployment of the Athena application.
+ 
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+Should one need to change where or how master Nodes are deployed on the network, either because an IP address range has been reallocated, or because a master Node is being added or removed from the cluster
+
+either by moving a master Node to a new IP range, or adding another master Node, for example -- 
+
+
+
+Configuring this option will reduce the complexity of future cluster Node pool changes significantly, 
+
+If configured, one will have greater flexibility in changing the makeup of the Node pool in future. Should one need to move to a different IP range, one could update a DNS record to resolve to the master Node's new IP address. If this was not configured

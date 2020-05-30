@@ -1,0 +1,39 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: athena-app-frontend
+  labels:
+    app: athena
+    role: frontend
+spec:
+  podSelector:
+    matchLabels:
+      app: athena
+      role: frontend
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            app.kubernetes.io/name: ingress-nginx
+      ports:
+      - protocol: TCP
+        port: 80
+      - protocol: TCP
+        port: 443
+    - from:
+      - podSelector:
+          matchLabels:
+            app: athena
+            role: db
+  egress:
+    - to:
+      - namespaceSelector:
+          matchLabels:
+            app.kubernetes.io/name: ingress-nginx
+    - to:
+      - podSelector:
+          matchLabels:
+            app: athena
+            role: db
+      ports:
+      - port: 1433

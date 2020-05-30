@@ -30,7 +30,7 @@ namespace Athena.Controllers
             var labName = _context.Template.Find(TemplateId).Lab;
             //var labName = "juice-shop";
 
-            var k8SClientConfig = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            var k8SClientConfig = KubernetesClientConfiguration.BuildDefaultConfig();
             var client = new Kubernetes(k8SClientConfig);
 
             var labDeployments = client.ListNamespacedDeployment(userName, null, null, null, "lab = " + labName);
@@ -105,7 +105,7 @@ namespace Athena.Controllers
                     }
 
 
-                        foreach (var rule in item.Spec.Rules)
+                    foreach (var rule in item.Spec.Rules)
                     {
                         foreach (var path in rule.Http.Paths)
                         {
@@ -113,7 +113,7 @@ namespace Athena.Controllers
                             {
                                 if (path.Path.Contains(regex))
                                 {
-                                    paths.Add(("http://" + rule.Host + path.Path).Replace(regex, "") + regexReplace, path.Backend.ServiceName);
+                                    paths.Add(("http://" + rule.Host + path.Path).Replace(regex, regexReplace), path.Backend.ServiceName);
                                 }
                                 else
                                 {
