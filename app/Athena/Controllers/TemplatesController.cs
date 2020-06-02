@@ -102,37 +102,9 @@ namespace Athena.Controllers
             return View();
         }
 
-        //
-       /* public async Task<IActionResult> Create([Bind("TemplateId,Path,TemplateName,Lab")] Template template)
-        {
-
-
-
-            var check = from t in _context.Template
-                        where t.TemplateName == template.TemplateName
-                        select t;
-
-            string path = template.Path;
-
-            string msg = AddLabel(path, "lab");
-            if (msg == template.Lab)
-            {
-                if (ModelState.IsValid && check.Count() == 0)
-                {
-                    _context.Add(template);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(template);
-            }
-            else
-            {
-                return RedirectToAction("Label", new { id = test });
-            }
-        }*/
-
+       
       
-        //
+ 
         public string CheckLabel(string path, string label)
         {
             var deserializeYAML = new DeserializerBuilder()
@@ -142,17 +114,17 @@ namespace Athena.Controllers
             var config = KubernetesClientConfiguration.BuildDefaultConfig();
             IKubernetes client = new Kubernetes(config);
 
-            //string path = @"C:\Users\Laptop User\source\repos\TestingConsole\TestingConsole\templates\juice\";
+           
 
 
             string name = null;
             bool test;
             string msg = "";
 
-            string pService = path + "Service";
-            string pIngress = path + "Ingress";
-            string pNetPol = path + "NetworkPolicy";
-            string pDeployment = path + "Deployment";
+            string pService = "/etc/athena/Templates/" + path + "/Service";
+            string pIngress = "/etc/athena/Templates/" + path + "/Ingress";
+            string pNetPol = "/etc/athena/Templates/" + path + "/NetworkPolicy";
+            string pDeployment = "/etc/athena/Templates/" + path + "/Deployment";
 
             if (Directory.Exists(pDeployment))
             {
@@ -198,7 +170,7 @@ namespace Athena.Controllers
                     }
                     if (test)
                     {
-                        //msg = "All " + label + " labels present and matching value " + name;
+                       
                         msg = name;
                     }
 
@@ -227,7 +199,7 @@ namespace Athena.Controllers
 
             foreach (string file in Directory.EnumerateFiles(path))
             {
-                //StreamReader fileContent = System.IO.File.OpenText(file);
+                
                 var fileContent = System.IO.File.ReadAllText(file);
                 
                 var deployment = Yaml.LoadFromString<V1Deployment>(fileContent);
@@ -344,11 +316,11 @@ namespace Athena.Controllers
 
             foreach (string file in Directory.EnumerateFiles(path))
             {
-                //StreamReader fileContent = System.IO.File.OpenText(file);
+                
                 var fileContent = System.IO.File.ReadAllText(file);
 
                 var service = Yaml.LoadFromString<V1Service>(fileContent);
-                //service = deserializer.Deserialize<V1Service>(fileContent);
+             
                 if (service == null)
                 {
                     match = false;
@@ -401,12 +373,12 @@ namespace Athena.Controllers
 
             foreach (string file in Directory.EnumerateFiles(path))
             {
-                //StreamReader fileContent = System.IO.File.OpenText(file);
+                
                 
                 var fileContent = System.IO.File.ReadAllText(file);
 
                 var ingress = Yaml.LoadFromString<Networkingv1beta1Ingress>(fileContent);
-                //ingress = deserializer.Deserialize<Networkingv1beta1Ingress>(fileContent);
+            
 
                 if (ingress == null)
                 {
@@ -443,20 +415,19 @@ namespace Athena.Controllers
             foreach (string file in Directory.EnumerateFiles(path))
             {
 
-                //StreamReader fileContent = System.IO.File.OpenText(file);
+                
                 
                 var fileContent = System.IO.File.ReadAllText(file);
 
                 var netPol = Yaml.LoadFromString<V1NetworkPolicy>(fileContent);
-                //netPol = deserializer.Deserialize<V1NetworkPolicy>(fileContent);
+               
 
                 if (netPol == null)
                 {
                     match = false;
                     break;
                 }
-                
-                // Check if NetworkPolicy has label - if no label return false
+
                 if (netPol.Metadata.Labels != null)
                 {
                     netPol.Metadata.Labels.TryGetValue(key, out curr);

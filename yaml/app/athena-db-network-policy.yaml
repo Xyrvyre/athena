@@ -2,6 +2,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   name: athena-app-database
+  namespace: athena-app
   labels:
     app: athena
     role: database
@@ -18,10 +19,25 @@ spec:
             role: frontend
       ports:
       - port: 1433
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            name: kube-system
+        podSelector:
+          matchLabels: 
+            k8s-app: kube-dns
   egress:
     - to:
       - podSelector:
           matchLabels:
             app: athena
             role: frontend
+    - to:
+      - namespaceSelector:
+          matchLabels:
+            name: kube-system
+        podSelector:
+          matchLabels: 
+            k8s-app: kube-dns
+          
 

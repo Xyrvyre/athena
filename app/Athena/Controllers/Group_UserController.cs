@@ -31,26 +31,7 @@ namespace Athena.Controllers
             else { return RedirectToAction("Error", "Groups"); }            
         }
 
-       /*
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var group_User = await _context.Group_User
-                .Include(g => g.Group)
-                .Include(g => g.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (group_User == null)
-            {
-                return NotFound();
-            }
-
-            return View(group_User);
-        }
-*/
+       
            
          public IActionResult Create(int id)
         {
@@ -80,8 +61,7 @@ namespace Athena.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("User", "Groups", new { id = GroupId });
             }
-           /* ViewData["GroupId"] = new SelectList(_context.Group, "GroupId", "GroupName", group_User.GroupId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", group_User.UserId);*/
+          
             return RedirectToAction("User", "Groups", new { id = GroupId });
         }
 

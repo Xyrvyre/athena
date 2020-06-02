@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using k8s.Models;
 
 namespace Athena
 {
@@ -24,16 +26,16 @@ namespace Athena
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            var conn = Configuration["ConnectionStrings:DefaultConnection"];
+            conn = conn.Replace("ENVPW", Configuration["DB_PW"]);
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.IdleTimeout = TimeSpan.FromHours(24);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -41,15 +43,15 @@ namespace Athena
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
             services.AddAuthentication()
                     .AddGoogle(options =>
                     {
-                        /*IConfigurationSection googleAuthNSection =
-                            Configuration.GetSection("Authentication:Google");*/
+                      
+                        
+                        options.ClientId = System.IO.File.ReadAllText("/etc/athena/.data/ci");
+                        options.ClientSecret = System.IO.File.ReadAllText("/etc/athena/.data/cs");
 
-                        var cred = JsonConvert.DeserializeObject<Dictionary<string, string>>(System.IO.File.ReadAllText("./OAuth.json"));
-                        options.ClientId = cred["ClientId"];
-                        options.ClientSecret = cred["ClientSecret"];
                     });
         }
 

@@ -1,3 +1,0 @@
-Address = client.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local
-Subnet = 10.0.0.2/24
-Port = 655

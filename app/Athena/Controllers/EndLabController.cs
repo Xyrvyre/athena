@@ -17,7 +17,6 @@ namespace Athena.Controllers
         public IActionResult Index()
         {
             string userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //string userName = HttpContext.Session.GetString("namespace");
             var k8SClientConfig = KubernetesClientConfiguration.BuildDefaultConfig();
             var client = new Kubernetes(k8SClientConfig);
             var TemplateId = HttpContext.Session.GetInt32("TemplateId");

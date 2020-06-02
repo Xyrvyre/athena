@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: athena-app
+  namespace: athena-app
   labels:
     app: athena
     role: frontend
@@ -19,9 +20,41 @@ spec:
       serviceAccountName: athena-service-account
       containers:
         - name: athena-app
-          image: #APP IMAGE HERE
+          image: # APP IMAGE NAME
           ports:
             - containerPort: 80
+          volumeMounts:
+          # This volume stores the secrets needed for Google API access
+          - name: cred
+            mountPath: "/etc/athena/.data"
+            readOnly: true
+          - name: templates
+            mountPath: "/etc/athena/Templates"
           env:
-            - name:
-              value:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Development"
+          - name: DB_PW
+            valueFrom:
+              secretKeyRef:
+                name: athena-db-pw
+                key: sa_password
+      volumes:
+      - name: cred
+        secret:
+          secretName: google-cred
+          items:
+          - key: sa_client_email
+            path: ce
+            mode: 0400
+          - key: sa_private_key
+            path: pk
+            mode: 0400
+          - key: oauth_client_id
+            path: ci 
+            mode: 0400
+          - key: oauth_client_secret
+            path: cs
+            mode: 0400
+      - name: templates
+        persistentVolumeClaim:
+          claimName: templates-claim

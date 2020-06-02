@@ -1,0 +1,23 @@
+Distributed with the Athena application are resources from the following projects:
+
+
+Distributed under the Apache License v2.0
+
+- MetalLB
+ (see https://github.com/metallb/metallb/blob/main/LICENSE)
+- ingress-nginx
+ (see https://github.com/kubernetes/ingress-nginx/blob/master/LICENSE)
+- Calico
+ (see https://github.com/projectcalico/calico/blob/master/LICENSE)
+- Kubernetes
+ (see https://github.com/kubernetes/kubernetes/blob/master/LICENSE)
+
+
+Distributed under the Mozilla Public License 2.0 
+
+- noVNC
+  (https://novnc.com/info.html)
+
+
+
+

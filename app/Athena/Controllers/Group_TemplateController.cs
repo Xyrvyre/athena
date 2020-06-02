@@ -51,7 +51,7 @@ namespace Athena.Controllers
         public async Task<IActionResult> Create([Bind("GroupId,TemplateId")] Group_Template group_Template)
         {
             var GroupId = group_Template.GroupId;
-            //if (!_context.Group_Template.Any(s => s.GroupId == group_Template.GroupId))
+           
             var check = from gt in _context.Group_Template
                   where gt.GroupId == group_Template.GroupId && gt.TemplateId == group_Template.TemplateId
                   select gt;
@@ -62,8 +62,7 @@ namespace Athena.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Template", "Groups", new { id = GroupId }); 
             }
-            /*ViewData["GroupId"] = new SelectList(_context.Group, "GroupId", "GroupName", group_Template.GroupId);
-            ViewData["TemplateId"] = new SelectList(_context.Template, "TemplateId", "TemplateName", group_Template.TemplateId);*/
+            
             return RedirectToAction("Template", "Groups", new { id = GroupId }); 
             
         }

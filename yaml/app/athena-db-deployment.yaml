@@ -1,26 +1,45 @@
+# Athena database deployment
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: athena-database
+  namespace: athena-app
   labels:
     app: athena   
     role: database
 spec:
   selector:
     matchLabels:
-      name: athena   
+      app: athena   
       role: database
   template:
     metadata:
       labels:
-        name: athena   
+        app: athena   
         role: database
     spec:
+      volumes:
+        - name: athena-db-storage
+          persistentVolumeClaim:
+           claimName: athena-db-pvc
       containers:
         - name: athena-db
-          image: #DATABASE IMAGE HERE
+          image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
           ports:
             - containerPort: 1433
           env:
-            - name:
-              value:
+          - name: MSSQL_PID
+            value: "Express"
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: athena-db-pw
+                key: sa_password
+          volumeMounts:
+            - mountPath: "/var/opt/mssql/data"
+             name: athena-db-storage
+
+

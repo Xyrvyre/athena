@@ -199,15 +199,7 @@ namespace Athena.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            /*var gt = _context.Group_Template.Where(m => m.GroupId == id);
-            foreach (var i in gt)
-            { _context.Group_Template.Remove(i); }
-
-            var ga = _context.Group_User.Where(m => m.GroupId == id);
-
-            foreach (var i in ga)
-            { _context.Group_User.Remove(i); }
-*/
+           
             var @group = await _context.Group.FindAsync(id);
             _context.Group.Remove(@group);
 

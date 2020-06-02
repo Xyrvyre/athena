@@ -1,0 +1,24 @@
+# This file was taken from https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/docs/examples/auth/oauth-external-auth/dashboard-ingress.yaml - it is reproduced here for your convenience.
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: oauth2-proxy
+  namespace: kube-system
+spec:
+  rules:
+  - host: # Your host name here
+    http:
+      paths:
+      - backend:
+          serviceName: oauth2-proxy
+          servicePort: 4180
+        path: /oauth2
+  tls:
+  - hosts: # Replace <hostname> with your host name
+    - <hostname>
+    secretName: # Your TLS secret name here
+
+
+
+    

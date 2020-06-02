@@ -43,10 +43,10 @@ namespace Athena.Controllers
             HttpContext.Session.SetInt32("TemplateId", id);
             
 
-            var pDeployments = "Templates/" + p + "/Deployment";
-            var pServices = "Templates/" + p + "/Service";
-            var pIngress = "Templates/" + p + "/Ingress";
-            string pNetPol = "Templates/" + p + "/NetworkPolicy";
+            var pDeployments = "/etc/athena/Templates/" + p + "/Deployment";
+            var pServices = "/etc/athena/Templates/" + p + "/Service";
+            var pIngress = "/etc/athena/Templates/" + p + "/Ingress";
+            string pNetPol = "/etc/athena/Templates/" + p + "/NetworkPolicy";
             
             try
             {
@@ -54,12 +54,10 @@ namespace Athena.Controllers
                 foreach (string file in Directory.EnumerateFiles(pServices))
                 {
 
-                    //StreamReader fileContent = System.IO.File.OpenText(file);
-                    
                     var fileContent = System.IO.File.ReadAllText(file);
 
                     var service = Yaml.LoadFromString<V1Service>(fileContent);
-                    //service = deserializer.Deserialize<V1Service>(fileContent);
+                   
 
                     var result = client.CreateNamespacedService(service, userName);
 
@@ -69,15 +67,12 @@ namespace Athena.Controllers
                 foreach (string file in Directory.EnumerateFiles(pDeployments))
                 {
 
-                   // StreamReader fileContent = System.IO.File.OpenText(file);
-                    
+                   
                    
                     var fileContent = System.IO.File.ReadAllText(file);
 
                     var deployment = Yaml.LoadFromString<V1Deployment>(fileContent);
                     
-                   // V1Deployment deployment = deserializeYAML.Deserialize<V1Deployment>(fileContent);
-
                     var result = client.CreateNamespacedDeployment(deployment, userName);
 
 
@@ -85,23 +80,23 @@ namespace Athena.Controllers
 
                  foreach (string file in Directory.EnumerateFiles(pIngress))
                  {
-                    //StreamReader fileContent = System.IO.File.OpenText(file);
+                    
                     var fileContent = System.IO.File.ReadAllText(file);
 
                     var ingress = Yaml.LoadFromString<Networkingv1beta1Ingress>(fileContent);
-                    // ingress = deserializeYAML.Deserialize<Networkingv1beta1Ingress>(fileContent);
+                    
                     AddIngress(client, ingress, userName);
                  }
 
                 foreach (string file in Directory.EnumerateFiles(pNetPol))
                 {
 
-                    //StreamReader fileContent = System.IO.File.OpenText(file);
+                    
                     V1NetworkPolicy netPol = null;
                     var fileContent = System.IO.File.ReadAllText(file);
 
                     netPol = Yaml.LoadFromString<V1NetworkPolicy>(fileContent);
-                    //netPol = deserializer.Deserialize<V1Service>(fileContent);
+                    
 
                     var result = client.CreateNamespacedNetworkPolicy(netPol, userName);
                 }
@@ -114,41 +109,7 @@ namespace Athena.Controllers
             }
         }
 
-/*        public void CleanLab(IKubernetes client, string userName, string key, string value)
-        {
-            var dList = client.ListNamespacedDeployment(userName, null, null, null, key + " = " + value);
-            var sList = client.ListNamespacedService(userName, null, null, null, key + " = " + value);
-            var nList = client.ListNamespacedNetworkPolicy(userName, null, null, null, key + " = " + value);
-            //var iList = client.ListNamespacedIngress1(userName, null, null, null, key + " = " + value);
-            if (dList != null)
-            {
-                foreach (var item in dList.Items)
-                {
-                    client.DeleteNamespacedDeployment(item.Metadata.Name, userName);
-                }
-            }
-            if (sList != null)
-            {
-                foreach (var item in sList.Items)
-                {
-                    client.DeleteNamespacedService(item.Metadata.Name, userName);
-                }
-            }
-           *//* if (iList != null)
-            {
-                foreach (var item in iList.Items)
-                {
-                    client.DeleteNamespacedIngress1(item.Metadata.Name, userName);
-                }
-            }*//*
-            if (nList != null)
-            {
-                foreach (var item in nList.Items)
-                {
-                    client.DeleteNamespacedNetworkPolicy(item.Metadata.Name, userName);
-                }
-            }
-        }*/
+
 
         public void AddIngress(IKubernetes client, Networkingv1beta1Ingress ingress, string nspace)
         {

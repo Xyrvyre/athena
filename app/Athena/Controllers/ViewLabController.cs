@@ -28,17 +28,19 @@ namespace Athena.Controllers
             string regexReplace; 
             var TemplateId = HttpContext.Session.GetInt32("TemplateId");
             var labName = _context.Template.Find(TemplateId).Lab;
-            //var labName = "juice-shop";
+            
 
             var k8SClientConfig = KubernetesClientConfiguration.BuildDefaultConfig();
             var client = new Kubernetes(k8SClientConfig);
 
             var labDeployments = client.ListNamespacedDeployment(userName, null, null, null, "lab = " + labName);
             var labPods = client.ListNamespacedPod(userName, null, null, null, "lab = " + labName);
-            //labDeployments.Metadata.Name
+            
 
             var ipAdd = new Dictionary<string, string>();
             
+            // Waits for all Pods to be present before trying to get their IP addresses
+
             while ( labDeployments.Items.Count != labPods.Items.Count)
             {
                 labPods = client.ListNamespacedPod(userName, null, null, null, "lab = " + labName);
@@ -46,39 +48,35 @@ namespace Athena.Controllers
             }
 
 
+            // Waits for all Pods to have IP addresses before trying to get them
             int readyPods;
             do
             {
                 readyPods = 0;
-      
-                    foreach (var pod in labPods.Items)
-                    {
-                        if (pod.Status.PodIP != null)
-                        {
-                            readyPods++;
-                        }
-                    }
-         
-                labPods = client.ListNamespacedPod(userName, null, null, null, "lab = " + labName);
-                Thread.Sleep(5);
-
-
-
-
-
-            } while (labDeployments.Items.Count != readyPods);
-            
-           
-
-            //
-            
-            foreach (var pod in labPods.Items)
-            {
-                while (pod.Status.PodIP == null)
+                foreach (var pod in labPods.Items)
                 {
-                    // do nothing
+                    if (pod.Status.PodIP != null)
+                    {
+                        readyPods++;
+                    }
+                        
                 }
-            }
+
+
+                if (labDeployments.Items.Count == readyPods)
+                {
+                    break;
+                }
+
+                
+                Thread.Sleep(5);
+                labPods = client.ListNamespacedPod(userName, null, null, null, "lab = " + labName);
+
+
+
+            } while (true);
+            
+        
 
 
 
@@ -89,6 +87,8 @@ namespace Athena.Controllers
                 ipAdd.Add(deploymentPods.FirstOrDefault().Status.PodIP, deployment.Metadata.Name);
             }
             ViewBag.IPADD = ipAdd;
+
+            // Reading paths from Ingress
 
             var labIngress = client.ListNamespacedIngress1(userName, null, null, null, "lab = " + labName);
             Dictionary<string, string> paths = new Dictionary<string, string>();

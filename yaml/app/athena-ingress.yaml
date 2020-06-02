@@ -4,7 +4,7 @@ metadata:
   name: ingress-athena
   namespace: athena
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
   labels:
     app: athena
 spec:
@@ -12,12 +12,7 @@ spec:
   - host: athena.local
     http:
       paths:
-      - path: /app(/|$)(.*)
+      - path: /app/(.*)
         backend:
           serviceName: athena-app
           servicePort: 80
-
-  tls:
-    - hosts:
-      - athena.err0r.stream
-      secretName: athena

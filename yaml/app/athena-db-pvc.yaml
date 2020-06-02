@@ -1,0 +1,14 @@
+# VolumeClaim for database storage
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: athena-db-pvc
+  namespace: athena-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Mi

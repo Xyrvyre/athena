@@ -4,11 +4,11 @@ metadata:
   name: athena-db
   labels:
     app: athena
-    role: db
+    role: database
 spec:
   selector:
     app: athena
-    role: db
+    role: database
   ports:
     - port: 1433
       targetPort: 1433
