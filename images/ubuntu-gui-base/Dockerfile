@@ -1,7 +1,7 @@
 
 FROM ubuntu:20.04
 
-LABEL version="1.0"
+LABEL version="1.01"
 LABEL description="Base ubuntu image with LXDE and VNC preconfigured"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -37,8 +37,8 @@ RUN rm /usr/lib/x86_64-linux-gnu/libvncserver.so.1 && \
 	wget https://github.com/tsl0922/ttyd/releases/download/1.6.0/ttyd_linux.x86_64 &&\
 	mv ttyd_linux.x86_64 /usr/local/bin/ttyd &&\
 	chmod 555 /etc/supervisord.conf &&\
-	chmod 554 /usr/local/bin/ttyd &&\
-	chmod 555 /tmp/xfce4.sh
+	chmod 554 /usr/local/bin/ttyd
+
 
 # Adding user account, passwords
 
